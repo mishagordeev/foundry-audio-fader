@@ -20,8 +20,10 @@ Hooks.on('ready', () => {
 
           // Attach click event
           fadeButton.on('click', () => {
-            const trackId = $(element).closest('.playlist-sound').data('data-sound-id');
-            console.log(`Fader | trackId: ${trackId}`)
+            const trackIdElement = $(element).closest('.sound');
+            const trackId = $(element).closest('.sound').data('data-sound-id');
+            console.log(`Fader | trackIdElement: ${trackIdElement}`);
+            console.log(`Fader | trackId: ${trackId}`);
             const fadeDuration = 5000; // 5 seconds fade-out as default
             smoothFadeVolume(trackId, fadeDuration);
           });
