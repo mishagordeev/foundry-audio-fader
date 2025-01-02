@@ -7,7 +7,7 @@ Hooks.on('ready', () => {
   Hooks.on('renderPlaylistDirectory', (app, html) => {
     console.log("Fader | Hooks on");
     
-      html.find('.playing').each((i, element) => {
+    $('#currently-playing').find("ol").each((i, element) => {
           const controlBar = $(element).find('.sound-controls');
           console.log("Fader | Sound flexrow playing founded");
           
