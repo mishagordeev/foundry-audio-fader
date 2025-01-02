@@ -4,7 +4,10 @@ Hooks.on('ready', () => {
   // Extend the Soundscape Player with our custom button
   Hooks.on('renderPlaylistDirectory', (app, html) => {
     console.log("Fader | Hooks on");
-      html.find('.sound').each((i, element) => {
+    
+    if (!game.user.isGM) return;
+
+      html.find('.sound playing').each((i, element) => {
           const controlBar = $(element).find('.sound-controls');
           console.log("Fader | Sound flexrow playing founded");
           if (controlBar.find('.smooth-fade').length > 0) return; // Avoid duplicate buttons
