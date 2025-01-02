@@ -2,7 +2,7 @@
 
 Hooks.on('ready', () => {
   // Extend the Soundscape Player with our custom button
-  Hooks.on('renderAudioSidebar', (app, html) => {
+  Hooks.on('renderPlaylistDirectory', (app, html) => {
     console.log("Fader | Hooks on");
       html.find('.sound flexrow playing').each((i, element) => {
           const controlBar = $(element).find('.sound-controls flexrow');
