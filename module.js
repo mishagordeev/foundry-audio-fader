@@ -12,6 +12,13 @@ Hooks.on('ready', () => {
           console.log("Fader | Sound flexrow playing founded");
           if (controlBar.find('.smooth-fade').length > 0) return; // Avoid duplicate buttons
 
+          const trackId = $(element).closest('.playlist-sound').data('sound-id');
+          const playlist = game.playlists.contents.find(p => p.sounds.some(s => s.id === trackId));
+          if (!playlist) return;
+
+          const track = playlist.sounds.find(sound => sound.id === trackId);
+          if (!track || track.volume === 0 || !track.playing) return; // Skip if volume is 0 or track is not playing
+
           // Add our smooth fade button
           const fadeButton = $(`
               <button class="smooth-fade">
@@ -23,9 +30,6 @@ Hooks.on('ready', () => {
 
           // Attach click event
           fadeButton.on('click', () => {
-            const trackIdElement = $(element).closest('.sound');
-            const trackId = $(element).closest('.sound').data('sound-id');
-            console.log(`Fader | trackId: ${trackId}`);
             const fadeDuration = 5000; // 5 seconds fade-out as default
             smoothFadeVolume(trackId, fadeDuration);
           });
@@ -50,8 +54,4 @@ async function smoothFadeVolume(trackId, duration) {
       track.update({ volume: newVolume });
       await new Promise(resolve => setTimeout(resolve, interval));
   }
-
-  // Stop the track when fully faded
-  track.stop();
-  ui.notifications.info('Track faded out successfully.');
 }
