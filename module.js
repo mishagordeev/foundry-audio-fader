@@ -7,7 +7,7 @@ Hooks.on('ready', () => {
     
     if (!game.user.isGM) return;
 
-      html.find('.sound playing').each((i, element) => {
+      html.find('.playing').each((i, element) => {
           const controlBar = $(element).find('.sound-controls');
           console.log("Fader | Sound flexrow playing founded");
           if (controlBar.find('.smooth-fade').length > 0) return; // Avoid duplicate buttons
