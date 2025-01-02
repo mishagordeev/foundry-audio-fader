@@ -3,8 +3,10 @@
 Hooks.on('ready', () => {
   // Extend the Soundscape Player with our custom button
   Hooks.on('renderAudioSidebar', (app, html) => {
-      html.find('.soundscape-playing').each((i, element) => {
-          const controlBar = $(element).find('.play-controls');
+    console.log("Fader | Hooks on");
+      html.find('.sound flexrow playing').each((i, element) => {
+          const controlBar = $(element).find('.sound-controls flexrow');
+          console.log("Fader | Sound flexrow playing founded");
           if (controlBar.find('.smooth-fade').length > 0) return; // Avoid duplicate buttons
 
           // Add our smooth fade button
