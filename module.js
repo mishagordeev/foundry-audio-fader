@@ -22,7 +22,6 @@ Hooks.on('ready', () => {
           fadeButton.on('click', () => {
             const trackIdElement = $(element).closest('.sound');
             const trackId = $(element).closest('.sound').data('sound-id');
-            console.log(`Fader | trackIdElement: ${trackIdElement}`);
             console.log(`Fader | trackId: ${trackId}`);
             const fadeDuration = 5000; // 5 seconds fade-out as default
             smoothFadeVolume(trackId, fadeDuration);
@@ -32,8 +31,10 @@ Hooks.on('ready', () => {
 });
 
 async function smoothFadeVolume(trackId, duration) {
-  const track = game.playlists.playing.find(sound => sound.id === trackId);
-  console.log(`Fader | track: ${track}`)
+  const playlist = game.playlists.contents.find(p => p.sounds.some(s => s.id === trackId));
+  if (!playlist) return ui.notifications.error('Playlist containing track not found.');
+
+  const track = playlist.sounds.find(sound => sound.id === trackId);
   if (!track) return ui.notifications.error('Track not found or not playing.');
 
   const startVolume = track.volume;
