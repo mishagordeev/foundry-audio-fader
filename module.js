@@ -14,7 +14,7 @@ Hooks.on('ready', () => {
           
           if (controlBar.find('.smooth-fade').length > 0) return; // Avoid duplicate buttons
 
-          const trackId = $(element).closest('.playlist-sound').data('sound-id');
+          const trackId = $(element).data('sound-id');
 
           console.log(`Fader | Track Id ${trackId}`);
 
