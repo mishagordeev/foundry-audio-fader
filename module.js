@@ -20,16 +20,16 @@ Hooks.on('ready', () => {
 
           // Attach click event
           fadeButton.on('click', () => {
-              const trackId = $(element).data('track-id');
-              const fadeDuration = 5000; // 5 seconds fade-out as default
-              smoothFadeVolume(trackId, fadeDuration);
+            const trackId = $(element).closest('.playlist-sound').data('sound-id');
+            const fadeDuration = 5000; // 5 seconds fade-out as default
+            smoothFadeVolume(trackId, fadeDuration);
           });
       });
   });
 });
 
 async function smoothFadeVolume(trackId, duration) {
-  const track = game.audio.playing.find(t => t.id === trackId);
+  const track = game.playlists.playing.find(sound => sound.id === trackId);
   if (!track) return ui.notifications.error('Track not found or not playing.');
 
   const startVolume = track.volume;
@@ -39,7 +39,7 @@ async function smoothFadeVolume(trackId, duration) {
 
   for (let i = 1; i <= steps; i++) {
       const newVolume = Math.max(startVolume - delta * i, 0);
-      track.setVolume(newVolume);
+      track.update({ volume: newVolume });
       await new Promise(resolve => setTimeout(resolve, interval));
   }
 
