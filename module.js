@@ -7,9 +7,10 @@ Hooks.on('ready', () => {
   Hooks.on('renderPlaylistDirectory', (app, html) => {
     console.log("Fader | Hooks on");
     
-    $('#currently-playing').find("ol").each((i, element) => {
+    $('#currently-playing').find('ol').find('li').each((i, element) => {
           const controlBar = $(element).find('.sound-controls');
-          console.log("Fader | Sound flexrow playing founded");
+          
+          console.log("Fader | " + $(element).text());
           
           if (controlBar.find('.smooth-fade').length > 0) return; // Avoid duplicate buttons
 
