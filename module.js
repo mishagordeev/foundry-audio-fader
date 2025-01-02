@@ -1,21 +1,25 @@
 // Smooth Volume Fader for Foundry VTT
 
 Hooks.on('ready', () => {
-  // Extend the Soundscape Player with our custom button
+  
+  if (!game.user.isGM) return;
+
   Hooks.on('renderPlaylistDirectory', (app, html) => {
     console.log("Fader | Hooks on");
     
-    if (!game.user.isGM) return;
-
       html.find('.playing').each((i, element) => {
           const controlBar = $(element).find('.sound-controls');
           console.log("Fader | Sound flexrow playing founded");
+          
           if (controlBar.find('.smooth-fade').length > 0) return; // Avoid duplicate buttons
 
           const trackId = $(element).closest('.playlist-sound').data('sound-id');
+
+          console.log(`Fader | Track Id ${trackId}`);
+
           const playlist = game.playlists.contents.find(p => p.sounds.some(s => s.id === trackId));
           if (!playlist) return;
-
+          
           const track = playlist.sounds.find(sound => sound.id === trackId);
           if (!track || track.volume === 0 || !track.playing) return; // Skip if volume is 0 or track is not playing
 
