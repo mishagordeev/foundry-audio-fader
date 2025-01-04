@@ -1,6 +1,6 @@
 {
     "name": "foundry-audio-fader",
-    "title": "Audio Fader",
+    "title": "Automatic Audio Fader",
     "description": "Automatic fader for playing audio.",
     "version": "1.0.0",
     "authors": [
