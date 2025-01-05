@@ -29,9 +29,10 @@ Hooks.on('ready', () => {
             `<a class="sound-control fas fa-volume-down smooth-fade" 
                 data-action="smooth-fade" 
                 data-tooltip="Fade Out">
+                ::before
             </a>`
           );
-          controlBar.append(fadeButton);
+          controlBar.append(fadeControl);
 
           // Attach click event
           fadeControl.on('click', () => {
