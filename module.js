@@ -25,16 +25,16 @@ Hooks.on('ready', () => {
           if (!track || track.volume === 0 || !track.playing) return; // Skip if volume is 0 or track is not playing
 
           // Add our smooth fade button
-          const fadeButton = $(`
-              <button class="smooth-fade">
-                  <i class="fas fa-volume-down"></i>
-              </button>
-          `);
-
+          const fadeControl = $(
+            `<a class="sound-control fas fa-volume-down smooth-fade" 
+                data-action="smooth-fade" 
+                data-tooltip="Fade Out">
+            </a>`
+          );
           controlBar.append(fadeButton);
 
           // Attach click event
-          fadeButton.on('click', () => {
+          fadeControl.on('click', () => {
             const fadeDuration = 5000; // 5 seconds fade-out as default
             smoothFadeVolume(trackId, fadeDuration);
           });
