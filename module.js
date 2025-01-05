@@ -14,6 +14,12 @@ Hooks.on('ready', () => {
           
           if (controlBar.find('.smooth-fade').length > 0) return; // Avoid duplicate buttons
 
+          controlBar.each((i, controlElement) => {
+            const currentFlexBasis = parseInt(window.getComputedStyle(controlElement).flexBasis, 10) || 0;
+            const newFlexBasis = currentFlexBasis + 16; // Add 16px
+            controlElement.style.flexBasis = `${newFlexBasis}px`;
+          });
+
           const trackId = $(element).data('sound-id');
 
           console.log(`Fader | Track Id ${trackId}`);
@@ -35,7 +41,7 @@ Hooks.on('ready', () => {
                 data-tooltip="Fade Out">
             </a>`
           );
-          
+
           controlBar.children(':first').before(fadeControl); // Place the button to the left of existing controls
 
           // Attach click event
@@ -59,9 +65,9 @@ Hooks.on('ready', () => {
 
     // Enable or disable the button based on the volume
     if (data.volume === 0) {
-        fadeButton.classList.add('disabled');
+        fadeButton.classList.add('inactive');
     } else {
-        fadeButton.classList.remove('disabled');
+        fadeButton.classList.remove('inactive');
     }
   });
 
