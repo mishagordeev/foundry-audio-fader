@@ -25,7 +25,7 @@ Hooks.on('ready', () => {
           
           if (!track || !track.playing) return; // Skip if the track is not playing
 
-          const isDisabled = track.volume === 0 ? ' disabled' : '';
+          const isDisabled = track.volume === 0 ? ' inactive' : '';
           
 
           // Add our smooth fade button
@@ -35,7 +35,8 @@ Hooks.on('ready', () => {
                 data-tooltip="Fade Out">
             </a>`
           );
-          controlBar.append(fadeControl);
+          
+          controlBar.children(':first').before(fadeControl); // Place the button to the left of existing controls
 
           // Attach click event
           fadeControl.on('click', () => {
@@ -46,6 +47,7 @@ Hooks.on('ready', () => {
   });
 
   Hooks.on('updatePlaylistSound', (playlist, sound, data) => {
+    console.log("Fader | update folume");
     if (!('volume' in data)) return; // Only handle volume changes
 
     const trackId = sound.id;
@@ -62,7 +64,7 @@ Hooks.on('ready', () => {
         fadeButton.classList.remove('disabled');
     }
   });
-  
+
 });
 
 async function smoothFadeVolume(trackId, duration) {
