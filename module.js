@@ -57,7 +57,7 @@ Hooks.on('ready', () => {
     
     if (!('volume' in playlist)) return; // Only handle volume changes
 
-    const trackId = sound.id;
+    const trackId = sound._id;
     const html = document.querySelector(`[data-sound-id="${trackId}"]`);
     if (!html) return;
 
@@ -65,7 +65,7 @@ Hooks.on('ready', () => {
     if (!fadeButton) return;
 
     // Enable or disable the button based on the volume
-    if (data.volume === 0) {
+    if (playlist.volume === 0) {
         fadeButton.classList.add('inactive');
         console.log("Fader | update folume add");
     } else {
