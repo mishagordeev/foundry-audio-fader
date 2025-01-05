@@ -53,7 +53,8 @@ Hooks.on('ready', () => {
   });
 
   Hooks.on('updatePlaylistSound', (playlist, sound, data) => {
-    console.log("Fader | update folume");
+    console.log(`Fader | update folume 1. ${playlist} 2. ${sound} 3. ${data}`);
+    
     if (!('volume' in data)) return; // Only handle volume changes
 
     const trackId = sound.id;
