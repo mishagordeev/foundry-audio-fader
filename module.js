@@ -66,8 +66,10 @@ Hooks.on('ready', () => {
     // Enable or disable the button based on the volume
     if (data.volume === 0) {
         fadeButton.classList.add('inactive');
+        console.log("Fader | update folume add");
     } else {
         fadeButton.classList.remove('inactive');
+        console.log("Fader | update folume remove");
     }
   });
 
