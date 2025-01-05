@@ -53,7 +53,7 @@ Hooks.on('ready', () => {
   });
 
   Hooks.on('updatePlaylistSound', (playlist, sound, data) => {
-    console.log(`Fader | update folume 1. ${playlist} 2. ${sound} 3. ${data}`);
+    console.log(`Fader | update folume 1. ${JSON.stringify(playlist, null, 2)} 2. ${JSON.stringify(sound, null, 2)} 3. ${JSON.stringify(data, null, 2)}`);
     
     if (!('volume' in data)) return; // Only handle volume changes
 
