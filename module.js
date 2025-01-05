@@ -22,14 +22,17 @@ Hooks.on('ready', () => {
           if (!playlist) return;
           
           const track = playlist.sounds.find(sound => sound.id === trackId);
-          if (!track || track.volume === 0 || !track.playing) return; // Skip if volume is 0 or track is not playing
+          
+          if (!track || !track.playing) return; // Skip if the track is not playing
+
+          const isDisabled = track.volume === 0 ? ' disabled' : '';
+          
 
           // Add our smooth fade button
           const fadeControl = $(
-            `<a class="sound-control fas fa-volume-down smooth-fade" 
+            `<a class="sound-control fas fa-volume-down smooth-fade${isDisabled}"
                 data-action="smooth-fade" 
                 data-tooltip="Fade Out">
-                ::before
             </a>`
           );
           controlBar.append(fadeControl);
@@ -41,6 +44,25 @@ Hooks.on('ready', () => {
           });
       });
   });
+
+  Hooks.on('updatePlaylistSound', (playlist, sound, data) => {
+    if (!('volume' in data)) return; // Only handle volume changes
+
+    const trackId = sound.id;
+    const html = document.querySelector(`[data-sound-id="${trackId}"]`);
+    if (!html) return;
+
+    const fadeButton = html.querySelector('.smooth-fade');
+    if (!fadeButton) return;
+
+    // Enable or disable the button based on the volume
+    if (data.volume === 0) {
+        fadeButton.classList.add('disabled');
+    } else {
+        fadeButton.classList.remove('disabled');
+    }
+  });
+  
 });
 
 async function smoothFadeVolume(trackId, duration) {
