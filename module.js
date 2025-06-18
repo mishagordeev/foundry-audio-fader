@@ -3,9 +3,11 @@ Hooks.on('ready', () => {
   if (!game.user.isGM) return;
 
   Hooks.on('renderPlaylistDirectory', (app, html) => {
+    console.log("FADER DEBUG");
     
     $('#currently-playing').find('ol').find('li').each((i, element) => {
           const controlBar = $(element).find('.sound-controls');
+          console.log(controlBar);
           
           if (controlBar.find('.smooth-fade').length > 0) return;
 
@@ -16,6 +18,7 @@ Hooks.on('ready', () => {
           });
 
           const trackId = $(element).data('sound-id');
+          console.log(trackId);
 
           const playlist = game.playlists.contents.find(p => p.sounds.some(s => s.id === trackId));
           if (!playlist) return;
