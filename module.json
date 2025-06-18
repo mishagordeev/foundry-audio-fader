@@ -1,5 +1,5 @@
 {
-    "name": "foundry-audio-fader",
+    "id": "foundry-audio-fader",
     "title": "Automatic Audio Fader",
     "description": "Automatic fader for playing audio.",
     "version": "1.0.0",
@@ -12,6 +12,7 @@
       }
     ],
     "compatibility": {
+      "minimum": "12",
       "verified": "12"
     },
     "scripts": [
